@@ -16,6 +16,8 @@ import com.nighthawk.spring_portfolio.mvc.person.PersonRole;
 import com.nighthawk.spring_portfolio.mvc.person.PersonRoleJpaRepository;
 import com.nighthawk.spring_portfolio.mvc.announcement.Announcement;
 import com.nighthawk.spring_portfolio.mvc.announcement.AnnouncementJPA;
+import com.nighthawk.spring_portfolio.mvc.mess.Mess;
+import com.nighthawk.spring_portfolio.mvc.mess.MessJpaRepository;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -27,6 +29,7 @@ import java.util.List;
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
     @Autowired NoteJpaRepository noteRepo;
+    @Autowired MessJpaRepository messRepo;
     @Autowired PersonRoleJpaRepository roleJpaRepository;
     @Autowired PersonDetailsService personDetailsService;
     @Autowired AnnouncementJPA announcementJPA;
@@ -53,6 +56,16 @@ public class ModelInit {
                 if (jokeFound.size() == 0)
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
+
+            String[] messArray = Mess.init();
+            for (String mess : messArray){
+                List<Mess> messFound = messRepo.findByMessIgnoreCase(mess);  // JPA lookup
+                if (messFound.size() == 0){
+                    messRepo.save(new Mess(null, mess)); //JPA save
+                }
+            }
+    
+
 
             // Person database is populated with starting people
             Person[] personArray = Person.init();

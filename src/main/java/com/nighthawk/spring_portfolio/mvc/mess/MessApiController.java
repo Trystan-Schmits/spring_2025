@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import io.jsonwebtoken.lang.Arrays;
+import com.nighthawk.spring_portfolio.mvc.jokes.JokesJpaRepository;
 
 import java.util.List;
 //import java.util.Optional;
@@ -16,7 +16,7 @@ public class MessApiController {
 
     // Autowired enables Control to connect URI request and POJO Object to easily for Database CRUD operations
     @Autowired
-    private MessJpaRepository repository;
+    private JokesJpaRepository repository;
 
     /* GET List of Jokes
      * @GetMapping annotation is used for mapping HTTP GET requests onto specific handler methods.
@@ -24,9 +24,15 @@ public class MessApiController {
     @GetMapping("/")
     public ResponseEntity<List> getMesses() {
         // ResponseEntity returns List of Jokes provide by JPA findAll()
-        //return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
-        return new ResponseEntity<>(Arrays.asList(Mess.init()),HttpStatus.OK);
+        return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
     }
+    /*
+    @GetMapping("/")
+    public ResponseEntity<List<Jokes>> getJokes() {
+        // ResponseEntity returns List of Jokes provide by JPA findAll()
+        return new ResponseEntity<>( repository.findAll(), HttpStatus.OK);
+    }
+    */
 
     /* Update Like
      * @PutMapping annotation is used for mapping HTTP PUT requests onto specific handler methods.

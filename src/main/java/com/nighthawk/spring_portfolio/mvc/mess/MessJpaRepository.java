@@ -10,6 +10,6 @@ public interface MessJpaRepository extends JpaRepository<Mess, Long> {
     The below custom methods are prototyped for this application
     */
     void save(String Mess);
-    //List<Mess> findAllByOrderByMessAsc();
-    //List<Mess> findByMessIgnoreCase(String Mess);
+    List<Mess> findAllByOrderByMessAsc();
+    List<Mess> findByMessIgnoreCase(String mess);
 }
