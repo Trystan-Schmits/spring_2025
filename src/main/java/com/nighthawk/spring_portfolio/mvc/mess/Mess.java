@@ -7,8 +7,6 @@ import lombok.NoArgsConstructor;
 import jakarta.persistence.*;
 
 @Data  // Annotations to simplify writing code (ie constructors, setters)
-@AllArgsConstructor
-@NoArgsConstructor
 @Entity // Annotation to simplify creating an entity, which is a lightweight persistence domain object. Typically, an entity represents a table in a relational database, and each entity instance corresponds to a row in that table.
 public class Mess {
     @Id
@@ -23,5 +21,13 @@ public class Mess {
         messesArray[0] = "hi";
         messesArray[1] = "hello";
         return messesArray;
+    }
+
+    public Mess(Long id, String mess){
+        this.mess = mess;
+    }
+
+    public Mess(){
+        this.mess = null;
     }
 }

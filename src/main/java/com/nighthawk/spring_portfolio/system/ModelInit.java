@@ -29,7 +29,7 @@ import java.util.List;
 public class ModelInit {  
     @Autowired JokesJpaRepository jokesRepo;
     @Autowired NoteJpaRepository noteRepo;
-    @Autowired MessJpaRepository messRepo;
+    @Autowired MessJpaRepository messRepository;
     @Autowired PersonRoleJpaRepository roleJpaRepository;
     @Autowired PersonDetailsService personDetailsService;
     @Autowired AnnouncementJPA announcementJPA;
@@ -57,13 +57,16 @@ public class ModelInit {
                     jokesRepo.save(new Jokes(null, joke, 0, 0)); //JPA save
             }
 
+            
             String[] messArray = Mess.init();
-            for (String mess : messArray){
-                List<Mess> messFound = messRepo.findByMessIgnoreCase(mess);  // JPA lookup
+            for (String m : messArray){
+                List<Mess> messFound = messRepository.findByMessIgnoreCase(m);  // JPA lookup
                 if (messFound.size() == 0){
-                    messRepo.save(new Mess(null, mess)); //JPA save
+                    Mess myMess = new Mess(null,m);
+                    messRepository.save(myMess); //JPA save
                 }
             }
+            
     
 
 
